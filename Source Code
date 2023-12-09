@@ -1,0 +1,55 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.*;
+class attendance 
+{
+public static void main(String args[]) throws ClassNotFoundException, SQLException
+{
+try 
+{
+Class.forName("oracle.jdbc.driver.OracleDriver");
+Connection con= 
+DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","system",
+ "tiger");
+PreparedStatement psmt = con.prepareStatement("insert into emp values (?,?)");
+BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+System.out.println("\t\t********************");
+System.out.println("\t\t COMPANYNAME");
+System.out.println("\t\t********************");
+System.out.println("\t\t ATTENDANCE TRACKER ");
+System.out.println("\t\t********************\n");
+int count=1;
+while(true) 
+{
+System.out.println("Employee"+count+" : Enter your details ");
+System.out.println("Enter employee id :");
+int id=Integer.parseInt(br.readLine());
+System.out.println("Enter employee name :");
+String name=br.readLine();
+System.out.println("Enter employee date of birth :");
+String dob=br.readLine();
+System.out.println("Enter employee dept :");
+String dept=br.readLine();
+System.out.println("Enter employee salary :");
+int sal=Integer.parseInt(br.readLine());
+System.out.println("Enter employee phone number :");
+int no=Integer.parseInt(br.readLine());
+psmt.setInt(1,id);
+psmt.setString(2,name);
+psmt.setString(3,dob);
+psmt.setString(4,dept);
+psmt.setInt(5,sal);
+psmt.setInt(6,no);
+System.out.println("Attendence noted !!!");
+count++;
+if(count==5)
+break;
+ }
+}
+catch(Exception e) 
+{
+System.out.println(e);
+}
+}
+}
+
